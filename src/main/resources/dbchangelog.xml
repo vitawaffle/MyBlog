@@ -76,4 +76,16 @@
         </insert>
     </changeSet>
 
+    <changeSet id="insert_test_roles" author="vitaly_lobatsevich" context="test">
+        <insert tableName="role">
+            <column name="name" value="TEST_ROLE_1" />
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="TEST_ROLE_2" />
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="TEST_ROLE_3" />
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
