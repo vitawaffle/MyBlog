@@ -88,4 +88,31 @@
         </insert>
     </changeSet>
 
+    <changeSet id="insert_test_users" author="vitaly_lobatsevich" context="test">
+        <insert tableName="user">
+            <column name="username" value="TEST_USER_1" />
+            <column name="password" value="$2y$10$IyBdOzYj3KpiHFovb1OqvOT4N/BV4YSbgVYl.i5qKkv/W2krwG2r6" />
+            <column name="first_name" value="Иван" />
+            <column name="last_name" value="Иванов" />
+            <column name="dob" value="1990-01-01 00:00:00" />
+            <column name="bio" value="И летящий в даль, в даль ангел..." />
+        </insert>
+        <insert tableName="user">
+            <column name="username" value="TEST_USER_2" />
+            <column name="password" value="$2y$10$IyBdOzYj3KpiHFovb1OqvOT4N/BV4YSbgVYl.i5qKkv/W2krwG2r6" />
+            <column name="first_name" value="Сидор" />
+            <column name="last_name" value="Сидоров" />
+            <column name="dob" value="1977-03-06 00:00:00" />
+            <column name="bio" value="Тёмный мрачный коридор..." />
+        </insert>
+        <insert tableName="user">
+            <column name="username" value="TEST_USER_3" />
+            <column name="password" value="$2y$10$IyBdOzYj3KpiHFovb1OqvOT4N/BV4YSbgVYl.i5qKkv/W2krwG2r6" />
+            <column name="first_name" value="Петр" />
+            <column name="last_name" value="Петров" />
+            <column name="dob" value="1998-07-12 00:00:00" />
+            <column name="bio" value="Группа крови на рукаве..." />
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
