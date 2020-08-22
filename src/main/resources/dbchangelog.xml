@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_role_table" author="vitaly_lobatsevich">
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="role_pk" nullable="false" />
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" unique="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert_default_roles" author="vitaly_lobatsevich">
+        <insert tableName="role">
+            <column name="name" value="USER" />
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="ADMIN" />
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="MODERATOR" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_user_table" author="vitaly_lobatsevich">
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="user_pk" nullable="false" />
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="active" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+            <column name="first_name" type="varchar(100)" />
+            <column name="last_name" type="varchar(100)" />
+            <column name="dob" type="date" />
+            <column name="bio" type="varchar(1000)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert_root_user" author="vitaly_lobatsevich">
+        <insert tableName="user">
+            <column name="username" value="root" />
+            <column name="password" value="$2y$10$7iCiZe56a1O1iplNFBvwtudf53fJLychL/VZzaEhv1A1uBGYdmvCy" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_user_role_table" author="vitaly_lobatsevich">
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" referencedTableName="user" referencedColumnNames="id"
+                             foreignKeyName="user_role_user_id_fk" />
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false" referencedTableName="role" referencedColumnNames="id"
+                             foreignKeyName="user_role_role_id_fk" />
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="user_role" columnNames="user_id, role_id" constraintName="user_role_pk" />
+    </changeSet>
+
+    <changeSet id="insert_root_role" author="vitaly_lobatsevich">
+        <insert tableName="user_role">
+            <column name="user_id" value="1" />
+            <column name="role_id" value="2" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

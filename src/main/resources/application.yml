@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/my_blog
+    username: dev
+    password: dev
+  liquibase:
+    change-log: classpath:dbchangelog.xml
