@@ -1,5 +1,6 @@
 package by.vit.myblog.service;
 
+import by.vit.myblog.entity.Role;
 import by.vit.myblog.entity.User;
 import by.vit.myblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,18 @@ public class UserServiceImpl implements UserService {
         var page = Collections.<User>emptyList();
         if (startItem >= 0 && startItem < users.size())
             page = users.subList(startItem, Math.min(startItem + pageable.getPageSize(), users.size()));
-        return new PageImpl(page, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()), users.size());
+        return new PageImpl<>(page, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()), users.size());
+    }
+
+    @Override
+    public Long register(final User user) {
+        val role = new Role();
+        role.setId(1L);
+
+        user.setId(null);
+        user.setActive(true);
+        user.setRoles(Collections.singletonList(role));
+        return save(user);
     }
 
     @Override

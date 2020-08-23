@@ -47,7 +47,7 @@ public class User extends MyEntity {
     private String bio;
 
     /** User's roles. */
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", nullable = false),

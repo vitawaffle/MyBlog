@@ -19,4 +19,12 @@ public interface UserService extends MyService<User, Long> {
      */
     Page<User> getPaginated(Pageable pageable);
 
+    /**
+     * This method register new user.
+     *
+     * @param user - user to register.
+     * @return id of registered user.
+     */
+    Long register(User user);
+
 }
