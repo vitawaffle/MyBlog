@@ -25,6 +25,6 @@ public interface UserService extends MyService<User, Long> {
      * @param user - user to register.
      * @return id of registered user.
      */
-    Long register(User user);
+    Long signIn(User user);
 
 }

@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long register(final User user) {
+    public Long signIn(final User user) {
         val role = new Role();
         role.setId(1L);
 

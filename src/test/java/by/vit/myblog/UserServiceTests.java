@@ -160,36 +160,36 @@ public class UserServiceTests {
     }
 
     @Test
-    public void register_ShouldHasRoleUser() {
+    public void signIn_ShouldHasRoleUser() {
         var user = new User();
         user.setUsername("SOME_USER_8");
         user.setPassword("password");
 
-        user = userRepository.findById(userService.register(user)).orElse(null);
+        user = userRepository.findById(userService.signIn(user)).orElse(null);
 
         assert user != null;
         assertEquals("USER", user.getRoles().get(0).getName());
     }
 
     @Test
-    public void register_ShouldHasOneRole() {
+    public void signIn_ShouldHasOneRole() {
         var user = new User();
         user.setUsername("SOME_USER_9");
         user.setPassword("password");
 
-        user = userRepository.findById(userService.register(user)).orElse(null);
+        user = userRepository.findById(userService.signIn(user)).orElse(null);
 
         assert user != null;
         assertEquals(1, user.getRoles().size());
     }
 
     @Test
-    public void register_ShouldBeActive() {
+    public void signIn_ShouldBeActive() {
         var user = new User();
         user.setUsername("SOME_USER_10");
         user.setPassword("password");
 
-        user = userRepository.findById(userService.register(user)).orElse(null);
+        user = userRepository.findById(userService.signIn(user)).orElse(null);
 
         assert user != null;
         assertTrue(user.getActive());
