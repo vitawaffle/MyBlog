@@ -5,3 +5,5 @@ spring:
     password: dev
   liquibase:
     change-log: classpath:dbchangelog.xml
+  thymeleaf:
+    cache: false
