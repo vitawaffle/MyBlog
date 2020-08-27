@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}">Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/signIn.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+        <div class="col-lg-4 col-md-8 col-sm-12">
+            <form>
+                <h2>Please, sign in</h2>
+                <div class="form-group">
+                    <label for="username">Create a username</label>
+                    <input type="text" class="form-control" id="username">
+                    <div class="feedback" id="usernameFeedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Pick a password</label>
+                    <input type="password" class="form-control" id="password">
+                    <div class="feedback" id="passwordFeedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm the password</label>
+                    <input type="password" class="form-control" id="confirmPassword">
+                    <div class="feedback" id="confirmPasswordFeedback"></div>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block mb-1" onclick="signIn();">
+                    Sign in
+                </button>
+                <p>
+                    Already have an account? <a href="/login">Log in</a>
+                </p>
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/signIn.js"></script>
+</body>
+</html>

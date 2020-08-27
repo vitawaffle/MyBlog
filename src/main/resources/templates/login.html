@@ -26,8 +26,14 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">Log in</button>
-                    <span class="text-muted">© Vitaly Lobatsevich</span>
+                    <div th:if="${param.error}" class="alert alert-danger mb-2 mt-2" role="alert">
+                        Wrong username or password.
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-1">Log in</button>
+                    <p class="mb-3">
+                        Don't have an account? <a href="/signIn">Sign in</a><br>
+                    </p>
+                    <p class="text-muted">© Vitaly Lobatsevich</p>
                 </form>
             </div>
         </div>

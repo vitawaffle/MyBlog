@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
-<nav th:fragment="header" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav th:fragment="header" class="navbar navbar-expand-lg navbar-light bg-light mb-3">
     <a class="navbar-brand" href="/">
         <img src="img/ico.png" width="30" height="30" alt="" loading="lazy">
         My Blog
@@ -28,7 +28,7 @@
             </li>
         </ul>
         <form sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
-            <a class="btn btn-primary my-2 mr-sm-2 disabled" href="/signIn">Sign in</a>
+            <a class="btn btn-primary my-2 mr-sm-2" href="/signIn">Sign in</a>
             <a class="btn btn-outline-primary my-2 my-sm-0" href="/login">Log in</a>
         </form>
         <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">

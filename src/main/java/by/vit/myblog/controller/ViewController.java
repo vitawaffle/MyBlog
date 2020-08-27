@@ -36,4 +36,16 @@ public class ViewController {
         return "login";
     }
 
+    /**
+     * Sign in view.
+     *
+     * @param model - view model.
+     * @return string name of view.
+     */
+    @GetMapping("/signIn")
+    public String signIn(final Model model) {
+        model.addAttribute("title", "Sign in");
+        return "signIn";
+    }
+
 }
