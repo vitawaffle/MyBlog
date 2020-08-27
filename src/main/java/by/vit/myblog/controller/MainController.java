@@ -25,7 +25,7 @@ public class MainController {
      * @param user - user to register.
      * @return id of registered user.
      */
-    @PostMapping("/sign-in")
+    @PostMapping("/signIn")
     public Long signIn(@RequestBody final User user) {
         return userService.signIn(user);
     }

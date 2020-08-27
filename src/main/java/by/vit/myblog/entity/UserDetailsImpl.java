@@ -1,7 +1,6 @@
 package by.vit.myblog.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +14,6 @@ import java.util.Collection;
  *
  * @author Vitaly Lobatsevich (vitaly.lobatsevich@gmail.com)
  */
-@Data
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 

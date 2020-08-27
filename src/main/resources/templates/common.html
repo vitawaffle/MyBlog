@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}">Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+<body>
+<nav th:fragment="header" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="img/ico.png" width="30" height="30" alt="" loading="lazy">
+        My Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li th:classappend="${title} == 'Home' ? 'active' : ''" class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" th:classappend="${title} == 'Profile' ? 'active' : ''"
+                class="nav-item">
+                <a class="nav-link disabled" href="/profile">Profile</a>
+            </li>
+        </ul>
+        <form sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
+            <a class="btn btn-primary my-2 mr-sm-2 disabled" href="/signIn">Sign in</a>
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="/login">Log in</a>
+        </form>
+        <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="/logout">Log out</a>
+        </form>
+    </div>
+</nav>
+
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+</body>
+</html>

@@ -15,12 +15,25 @@ public class ViewController {
     /**
      * Index view.
      *
+     * @param model - view model.
      * @return string name of view.
      */
     @GetMapping("/")
     public String index(final Model model) {
         model.addAttribute("title", "Home");
         return "index";
+    }
+
+    /**
+     * Login view.
+     *
+     * @param model - view model.
+     * @return string name of view.
+     */
+    @GetMapping("/login")
+    public String login(final Model model) {
+        model.addAttribute("title", "Log in");
+        return "login";
     }
 
 }
