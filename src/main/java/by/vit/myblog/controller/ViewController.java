@@ -48,4 +48,16 @@ public class ViewController {
         return "signIn";
     }
 
+    /**
+     * Profile view.
+     *
+     * @param model - view model.
+     * @return string name of view.
+     */
+    @GetMapping("/profile")
+    public String profile(final Model model) {
+        model.addAttribute("title", "Profile");
+        return "profile";
+    }
+
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${title}">Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/profile.css">
+</head>
+<body>
+<nav th:insert="common::header"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+        <div class="col-lg-4 col-md-8 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Password
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="currentPassword">Current password.</label>
+                            <input type="password" class="form-control" id="currentPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New password</label>
+                            <input type="password" class="form-control" id="newPassword">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="updatePassword()">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-0"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/profile.js"></script>
+</body>
+</html>
