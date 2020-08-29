@@ -36,8 +36,11 @@
                             <input type="password" class="form-control" id="confirmPassword">
                             <div id="confirmPasswordFeedback" class="feedback"></div>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="updatePassword()">
+                        <button type="button" class="btn btn-primary" onclick="updatePassword();">
                             Update
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" onclick="cancelUpdatePassword();">
+                            Cancel
                         </button>
                         <div id="passwordUpdated" class="alert alert-success alert-password-updated mt-3" role="alert">
                             Password updated.

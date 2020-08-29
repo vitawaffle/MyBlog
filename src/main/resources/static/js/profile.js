@@ -6,6 +6,15 @@ const newPasswordFeedback = $("#newPasswordFeedback");
 const confirmPasswordFeedback = $("#confirmPasswordFeedback");
 const passwordUpdatedAlert = $("#passwordUpdated");
 
+function cleanAll() {
+    cleanElement(currentPasswordInput, currentPasswordFeedback);
+    cleanElement(newPasswordInput, newPasswordFeedback);
+    cleanElement(confirmPasswordInput, confirmPasswordFeedback);
+    currentPasswordInput.val("");
+    newPasswordInput.val("");
+    confirmPasswordInput.val("");
+}
+
 function updatePassword() {
     const currentPasswordIsValid = checkCurrentPassword(currentPasswordInput, currentPasswordFeedback);
     const newPasswordIsValid = checkPassword(newPasswordInput, newPasswordFeedback);
@@ -25,12 +34,7 @@ function updatePassword() {
             dataType: "json",
             complete: function (jqXHR) {
                 if (jqXHR.status === 201) {
-                    cleanElement(currentPasswordInput, currentPasswordFeedback);
-                    cleanElement(newPasswordInput, newPasswordFeedback);
-                    cleanElement(confirmPasswordInput, confirmPasswordFeedback);
-                    currentPasswordInput.val("");
-                    newPasswordInput.val("");
-                    confirmPasswordInput.val("");
+                    cleanAll();
                     passwordUpdatedAlert.show();
                     setTimeout(function () {
                         passwordUpdatedAlert.hide();
@@ -43,6 +47,10 @@ function updatePassword() {
             }
         });
     }
+}
+
+function cancelUpdatePassword() {
+    cleanAll();
 }
 
 currentPasswordInput.blur(function () {
