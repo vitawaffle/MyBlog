@@ -1,6 +1,7 @@
 package by.vit.myblog;
 
 import by.vit.myblog.entity.Password;
+import by.vit.myblog.entity.Person;
 import by.vit.myblog.exception.UnauthorizedException;
 import by.vit.myblog.repository.UserRepository;
 import by.vit.myblog.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -213,6 +215,17 @@ public class UserServiceTests {
         password.setNewPassword("NewSuperPassword2");
 
         assertThrows(UnauthorizedException.class, () -> userService.updatePassword("TEST_USER_4", password));
+    }
+
+    @Test
+    public void updatePersonalInfo_ShouldDoesNotThrow() {
+        val person = new Person();
+        person.setFirstName("Алексей");
+        person.setLastName("Алексеев");
+        person.setDob(new Date());
+        person.setBio("Мой мир огромен...");
+
+        assertDoesNotThrow(() -> userService.updatePersonalInfo("TEST_USER_5", person));
     }
 
 }

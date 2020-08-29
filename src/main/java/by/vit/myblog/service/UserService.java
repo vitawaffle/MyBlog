@@ -1,6 +1,7 @@
 package by.vit.myblog.service;
 
 import by.vit.myblog.entity.Password;
+import by.vit.myblog.entity.Person;
 import by.vit.myblog.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +37,14 @@ public interface UserService extends MyService<User, Long> {
      * @return updated user id.
      */
     Long updatePassword(String username, Password password);
+
+    /**
+     * This method updated personal info for user with specified username.
+     *
+     * @param username - user's username.
+     * @param person - person entity.
+     * @return updated user id.
+     */
+    Long updatePersonalInfo(String username, Person person);
 
 }

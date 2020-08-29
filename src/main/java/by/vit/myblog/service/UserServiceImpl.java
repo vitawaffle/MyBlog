@@ -1,6 +1,7 @@
 package by.vit.myblog.service;
 
 import by.vit.myblog.entity.Password;
+import by.vit.myblog.entity.Person;
 import by.vit.myblog.entity.Role;
 import by.vit.myblog.entity.User;
 import by.vit.myblog.exception.UnauthorizedException;
@@ -60,6 +61,16 @@ public class UserServiceImpl implements UserService {
             throw new UnauthorizedException();
         user.setPassword(password.getNewPassword());
         return save(user);
+    }
+
+    @Override
+    public Long updatePersonalInfo(final String username, final Person person) {
+        val user = userRepository.findByUsername(username);
+        user.setFirstName(person.getFirstName());
+        user.setLastName(person.getLastName());
+        user.setDob(person.getDob());
+        user.setBio(person.getBio());
+        return userRepository.save(user).getId();
     }
 
     @Override
