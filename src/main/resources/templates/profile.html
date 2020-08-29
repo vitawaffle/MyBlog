@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/validation.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
 </head>
 <body>
@@ -23,14 +24,24 @@
                         <div class="form-group">
                             <label for="currentPassword">Current password.</label>
                             <input type="password" class="form-control" id="currentPassword">
+                            <div id="currentPasswordFeedback" class="feedback"></div>
                         </div>
                         <div class="form-group">
                             <label for="newPassword">New password</label>
                             <input type="password" class="form-control" id="newPassword">
+                            <div id="newPasswordFeedback" class="feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <lavel for="confirmPassword">Confirm password</lavel>
+                            <input type="password" class="form-control" id="confirmPassword">
+                            <div id="confirmPasswordFeedback" class="feedback"></div>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="updatePassword()">
                             Update
                         </button>
+                        <div id="passwordUpdated" class="alert alert-success alert-password-updated mt-3" role="alert">
+                            Password updated.
+                        </div>
                     </form>
                 </div>
             </div>
@@ -42,6 +53,7 @@
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/validation.js"></script>
 <script type="text/javascript" src="js/profile.js"></script>
 </body>
 </html>

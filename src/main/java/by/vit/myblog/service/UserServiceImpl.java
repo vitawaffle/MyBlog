@@ -1,7 +1,9 @@
 package by.vit.myblog.service;
 
+import by.vit.myblog.entity.Password;
 import by.vit.myblog.entity.Role;
 import by.vit.myblog.entity.User;
+import by.vit.myblog.exception.UnauthorizedException;
 import by.vit.myblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -48,6 +50,15 @@ public class UserServiceImpl implements UserService {
         user.setId(null);
         user.setActive(true);
         user.setRoles(Collections.singletonList(role));
+        return save(user);
+    }
+
+    @Override
+    public Long updatePassword(final String username, final Password password) {
+        val user = userRepository.findByUsername(username);
+        if (!passwordEncoder.matches(password.getCurrentPassword(), user.getPassword()))
+            throw new UnauthorizedException();
+        user.setPassword(password.getNewPassword());
         return save(user);
     }
 

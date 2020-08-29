@@ -1,5 +1,7 @@
 package by.vit.myblog;
 
+import by.vit.myblog.entity.Password;
+import by.vit.myblog.exception.UnauthorizedException;
 import by.vit.myblog.repository.UserRepository;
 import by.vit.myblog.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -193,6 +195,24 @@ public class UserServiceTests {
 
         assert user != null;
         assertTrue(user.getActive());
+    }
+
+    @Test
+    public void updatePassword_ValidCurrentPassword_ShouldDoesNotThrow() {
+        val password = new Password();
+        password.setCurrentPassword("password");
+        password.setNewPassword("NewSuperPassword1");
+
+        assertDoesNotThrow(() -> userService.updatePassword("TEST_USER_4", password));
+    }
+
+    @Test
+    public void updatePassword_InvalidCurrentPassword_ShouldThrowsUnauthorizedException() {
+        val password = new Password();
+        password.setCurrentPassword("");
+        password.setNewPassword("NewSuperPassword2");
+
+        assertThrows(UnauthorizedException.class, () -> userService.updatePassword("TEST_USER_4", password));
     }
 
 }

@@ -11,8 +11,6 @@ import java.io.Serializable;
 /**
  * Parent class for application entities.
  *
- * @param <ID> - identifier type.
- *
  * @author Vitaly Lobatsevich (vitaly.lobatsevich@gmail.com)
  */
 @MappedSuperclass

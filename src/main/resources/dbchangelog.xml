@@ -113,6 +113,14 @@
             <column name="dob" value="1998-07-12 00:00:00" />
             <column name="bio" value="Группа крови на рукаве..." />
         </insert>
+        <insert tableName="user">
+            <column name="username" value="TEST_USER_4" />
+            <column name="password" value="$2y$10$Uxv8HXddfJbugDe5gRAkKOok24QHzUGffNgCaxRI/gydZjCoO1c5S" />
+            <column name="first_name" value="Моисей" />
+            <column name="last_name" value="Моисеев" />
+            <column name="dob" value="1975-08-23 00:00:00" />
+            <column name="bio" value="Танцуй для меня-а, только для меня-а!" />
+        </insert>
     </changeSet>
 
 </databaseChangeLog>
