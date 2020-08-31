@@ -27,7 +27,7 @@ function signIn() {
                     window.location.href = "/login";
                 }
                 if (jqXHR.status === 400) {
-                    let errors = JSON.parse(jqXHR.responseText);
+                    const errors = JSON.parse(jqXHR.responseText);
                     if (errors.username !== undefined) {
                         markElementInvalid(usernameInput, usernameFeedback, errors.username);
                     }

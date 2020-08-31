@@ -2,8 +2,6 @@ package by.vit.myblog.entity;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * Person entity. Used to update personal info.
  *
@@ -19,7 +17,7 @@ public class Person {
     private String lastName;
 
     /** Date of birth. */
-    private Date dob;
+    private String dob;
 
     /** Bio. */
     private String bio;

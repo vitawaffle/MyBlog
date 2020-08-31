@@ -47,4 +47,12 @@ public interface UserService extends MyService<User, Long> {
      */
     Long updatePersonalInfo(String username, Person person);
 
+    /**
+     * This method gets user personal info by username.
+     *
+     * @param username - user's username.
+     * @return person entity.
+     */
+    Person getPersonInfoByUsername(String username);
+
 }

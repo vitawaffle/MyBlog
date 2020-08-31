@@ -3,6 +3,8 @@ const passwordRegex = /^[a-zA-Z0-9]{8,64}$/;
 const passwordUppercaseRegex = /[A-Z]/;
 const passwordLowercaseRegex = /[a-z]/;
 const passwordNumbersRegex = /[0-9]/;
+const firstNameRegex = /^[a-zA-Z]{1,50}$/;
+const lastNameRegex = /^[a-zA-Z-]{1,50}$/;
 
 const successMessage = "Looks good!";
 
@@ -95,6 +97,26 @@ function checkCurrentPassword(currentPasswordInput, currentPasswordFeedback) {
     if (isBlank(currentPassword)) {
         markElementInvalid(currentPasswordInput, currentPasswordFeedback, "Please enter your current"
             + " password.");
+        return false;
+    }
+    return true;
+}
+
+function checkFirstName(firstNameInput, firstNameFeedback) {
+    const firstName = firstNameInput.val();
+    cleanElement(firstNameInput, firstNameFeedback);
+    if (!isBlank(firstName) && !firstName.match(firstNameRegex)) {
+        markElementInvalid(firstNameInput, firstNameFeedback, "First name contains invalid characters.");
+        return false;
+    }
+    return true;
+}
+
+function checkLastName(lastNameInput, lastNameFeedback) {
+    const lastName = lastNameInput.val();
+    cleanElement(lastNameInput, lastNameFeedback);
+    if (!isBlank(lastName) && !lastName.match(lastNameRegex)) {
+        markElementInvalid(lastNameInput, lastNameFeedback, "Last name contains invalid characters.");
         return false;
     }
     return true;

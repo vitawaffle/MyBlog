@@ -222,10 +222,15 @@ public class UserServiceTests {
         val person = new Person();
         person.setFirstName("Алексей");
         person.setLastName("Алексеев");
-        person.setDob(new Date());
+        person.setDob("2020-01-01");
         person.setBio("Мой мир огромен...");
 
         assertDoesNotThrow(() -> userService.updatePersonalInfo("TEST_USER_5", person));
+    }
+
+    @Test
+    public void getPersonalInfoByUsername_ShouldReturnNotNull() {
+        assertNotNull(userService.getPersonInfoByUsername("TEST_USER_6"));
     }
 
 }

@@ -16,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 
 /**
@@ -32,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     /** Password encoder. */
     private final PasswordEncoder passwordEncoder;
+
+    /** Date formatter. */
+    private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public Page<User> getPaginated(final Pageable pageable) {
@@ -68,9 +74,24 @@ public class UserServiceImpl implements UserService {
         val user = userRepository.findByUsername(username);
         user.setFirstName(person.getFirstName());
         user.setLastName(person.getLastName());
-        user.setDob(person.getDob());
+        if (person.getDob() != null) {
+            try {
+                user.setDob(dateFormatter.parse(person.getDob()));
+            } catch (ParseException ignore) {}
+        }
         user.setBio(person.getBio());
         return userRepository.save(user).getId();
+    }
+
+    @Override
+    public Person getPersonInfoByUsername(final String username) {
+        val user = userRepository.findByUsername(username);
+        val person = new Person();
+        person.setFirstName(user.getFirstName());
+        person.setLastName(user.getLastName());
+        person.setDob(user.getDob() != null ? dateFormatter.format(user.getDob()) : null);
+        person.setBio(user.getBio());
+        return person;
     }
 
     @Override

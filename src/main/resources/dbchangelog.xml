@@ -125,6 +125,22 @@
             <column name="username" value="TEST_USER_5" />
             <column name="password" value="$2y$10$Uxv8HXddfJbugDe5gRAkKOok24QHzUGffNgCaxRI/gydZjCoO1c5S" />
         </insert>
+        <insert tableName="user">
+            <column name="username" value="TEST_USER_6" />
+            <column name="password" value="$2y$10$Uxv8HXddfJbugDe5gRAkKOok24QHzUGffNgCaxRI/gydZjCoO1c5S" />
+            <column name="first_name" value="Роман" />
+            <column name="last_name" value="Романов" />
+            <column name="dob" value="1972-07-15 00:00:00" />
+            <column name="bio" value="Рубиновые части солнца зари, рубят злые страсти, сжигают внутри..." />
+        </insert>
+        <insert tableName="user">
+            <column name="username" value="Foma_1999" />
+            <column name="password" value="$2y$10$qnaFa3kuhScYXdfcezY8PuzQQnwRj9lpMHHPt9JnKwCER/xTFpkFK" />
+            <column name="first_name" value="Фома" />
+            <column name="last_name" value="Фомин" />
+            <column name="dob" value="1999-06-06 00:00:00" />
+            <column name="bio" value="Рушымся на Марс! Рушымся на Марс! Рушымся на Марс! На Марс..." />
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

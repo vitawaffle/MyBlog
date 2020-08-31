@@ -1,15 +1,13 @@
 package by.vit.myblog.controller;
 
 import by.vit.myblog.entity.Password;
+import by.vit.myblog.entity.Person;
 import by.vit.myblog.entity.User;
 import by.vit.myblog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Application main functional controller.
@@ -45,6 +43,28 @@ public class MainController {
     @ResponseStatus(HttpStatus.CREATED)
     public Long updatePassword(@RequestBody final Password password) {
         return userService.updatePassword(SecurityContextHolder.getContext().getAuthentication().getName(), password);
+    }
+
+    /**
+     * Update personal info method.
+     *
+     * @param person - person entity.
+     * @return updated user id.
+     */
+    @PostMapping("/updatePersonalInfo")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Long updatePersonalInfo(@RequestBody final Person person) {
+        return userService.updatePersonalInfo(SecurityContextHolder.getContext().getAuthentication().getName(), person);
+    }
+
+    /**
+     * Get current user personal info.
+     *
+     * @return person entity.
+     */
+    @GetMapping("/personalInfo")
+    public Person getPersonalInfo() {
+        return userService.getPersonInfoByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
 }
