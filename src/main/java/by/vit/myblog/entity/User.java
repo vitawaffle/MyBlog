@@ -1,5 +1,7 @@
 package by.vit.myblog.entity;
 
+import by.vit.myblog.validation.Password;
+import by.vit.myblog.validation.Username;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,10 +21,12 @@ import java.util.List;
 public class User extends MyEntity {
 
     /** Username. */
+    @Username
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     /** Password. */
+    @Password
     @Column(name = "password", nullable = false)
     private String password;
 

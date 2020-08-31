@@ -3,6 +3,12 @@ spring:
     url: jdbc:mysql://localhost/my_blog
     username: dev
     password: dev
+  jpa:
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
   liquibase:
     change-log: classpath:dbchangelog.xml
   thymeleaf:

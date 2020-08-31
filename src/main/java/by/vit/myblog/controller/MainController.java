@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * Application main functional controller.
  *
@@ -29,7 +31,7 @@ public class MainController {
      */
     @PostMapping("/signIn")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long signIn(@RequestBody final User user) {
+    public Long signIn(@RequestBody @Valid final User user) {
         return userService.signIn(user);
     }
 
