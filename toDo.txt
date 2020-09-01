@@ -1,2 +1,2 @@
 - Vertically center the login and sign in forms on login and sign in pages.
-- Implement server side validation.
+- Make more variable last name validator.

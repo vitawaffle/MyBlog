@@ -3,8 +3,8 @@ const passwordRegex = /^[a-zA-Z0-9]{8,64}$/;
 const passwordUppercaseRegex = /[A-Z]/;
 const passwordLowercaseRegex = /[a-z]/;
 const passwordNumbersRegex = /[0-9]/;
-const firstNameRegex = /^[a-zA-Z]{1,50}$/;
-const lastNameRegex = /^[a-zA-Z-]{1,50}$/;
+const firstNameRegex = /^[A-Z][a-z]{1,49}$/;
+const lastNameRegex = /^[A-Z][a-z]{1,49}$/;
 
 const successMessage = "Looks good!";
 
