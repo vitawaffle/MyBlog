@@ -143,4 +143,43 @@
         </insert>
     </changeSet>
 
+    <changeSet id="create_post_table" author="vitaly_lobatsevich">
+        <createTable tableName="post">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="task_pk" nullable="false" />
+            </column>
+            <column name="title" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="content" type="varchar(1000)">
+                <constraints nullable="false" />
+            </column>
+            <column name="creation" type="datetime" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" referencedTableName="user" referencedColumnNames="id"
+                             foreignKeyName="post_user_id_fk" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert_test_posts" author="vitaly_lobatsevich" context="test">
+        <insert tableName="post">
+            <column name="title" value="Первый пост этого блога" />
+            <column name="content" value="С помощью этого поста можно протестировать работоспособность сервисов" />
+            <column name="user_id" value="8" />
+        </insert>
+        <insert tableName="post">
+            <column name="title" value="Супер-пупер программа" />
+            <column name="content" value="Это будет просто неподрожаемо!" />
+            <column name="user_id" value="8" />
+        </insert>
+        <insert tableName="post">
+            <column name="title" value="Тебя ждёт смерть" />
+            <column name="content" value="Тебя сотрут в порошок" />
+            <column name="user_id" value="8" />
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
