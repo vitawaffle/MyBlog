@@ -39,7 +39,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPaginated(final Pageable pageable) {
         val posts = postRepository.findAll();
-        posts.sort(comparator);
+        posts.sort(Collections.reverseOrder(comparator));
         val startItem = pageable.getPageNumber() * pageable.getPageSize();
         var page = Collections.<Post>emptyList();
         if (startItem >= 0 && startItem < posts.size())

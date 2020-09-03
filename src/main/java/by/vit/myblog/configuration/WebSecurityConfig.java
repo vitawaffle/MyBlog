@@ -2,6 +2,7 @@ package by.vit.myblog.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -33,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(registry -> {
                     registry
                             .antMatchers("/", "/css/**", "/js/**", "/img/**", "/signIn").permitAll()
+                            .antMatchers(HttpMethod.GET, "/posts").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(registry -> {
