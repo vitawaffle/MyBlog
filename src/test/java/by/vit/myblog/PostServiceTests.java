@@ -2,6 +2,7 @@ package by.vit.myblog;
 
 import by.vit.myblog.entity.Post;
 import by.vit.myblog.entity.User;
+import by.vit.myblog.exception.ForbiddenException;
 import by.vit.myblog.service.PostService;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -148,6 +149,51 @@ public class PostServiceTests {
     @Test
     public void deleteById_NotExistingId_ShouldDoesNotThrow() {
         assertDoesNotThrow(() -> postService.deleteById(0L));
+    }
+
+    @Test
+    public void create_ShouldDoesNotThrow() {
+        val post = new Post();
+        post.setTitle("Проверяем способность творить посты");
+        post.setContent("А там и до сотворения мира недалеко");
+
+        assertDoesNotThrow(() -> postService.create("Foma_1999", post));
+    }
+
+    @Test
+    public void update_Valid_ShouldDoesNotThrow() {
+        val post = new Post();
+        post.setId(4L);
+        post.setTitle("Этим человеком был Альберт Эйнштейн");
+        post.setContent("Я не знаю каким оружием будут сражаться в Третьей мировой войне, но в Четвертой будут"
+                + " сражаться палками и камнями.");
+
+        assertDoesNotThrow(() -> postService.update("Foma_1999", post));
+    }
+
+    @Test
+    public void update_NotAuthor_ShouldThrowsForbiddenException() {
+        val post = new Post();
+        post.setId(5L);
+        post.setTitle("На границе тучи ходят хмуро");
+        post.setContent("Край суровый тишиной объят");
+
+        assertThrows(ForbiddenException.class, () -> postService.update("Foma_1999", post));
+    }
+
+    @Test
+    public void delete_Valid_ShouldDoesNotThrow() {
+        assertDoesNotThrow(() -> postService.delete("Foma_1999", 6L));
+    }
+
+    @Test
+    public void delete_NotAuthor_ShouldThrowsForbiddenException() {
+        assertThrows(ForbiddenException.class, () -> postService.delete("Foma_1999", 7L));
+    }
+
+    @Test
+    public void delete_NotExistingId_ShouldDoesNotThrow() {
+        assertDoesNotThrow(() -> postService.delete("Foma_1999", 0L));
     }
 
 }

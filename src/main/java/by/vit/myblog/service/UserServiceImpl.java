@@ -1,5 +1,6 @@
 package by.vit.myblog.service;
 
+import by.vit.myblog.comparator.UserUsernameComparator;
 import by.vit.myblog.entity.Password;
 import by.vit.myblog.entity.Person;
 import by.vit.myblog.entity.Role;
@@ -39,9 +40,13 @@ public class UserServiceImpl implements UserService {
     /** Date formatter. */
     private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
+    /** Collection comparator. */
+    private final UserUsernameComparator comparator = new UserUsernameComparator();
+
     @Override
     public Page<User> getPaginated(final Pageable pageable) {
         val users = userRepository.findAll();
+        users.sort(comparator);
         val startItem = pageable.getPageNumber() * pageable.getPageSize();
         var page = Collections.<User>emptyList();
         if (startItem >= 0 && startItem < users.size())

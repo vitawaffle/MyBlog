@@ -19,4 +19,32 @@ public interface PostService extends MyService<Post, Long> {
      */
     Page<Post> getPaginated(Pageable pageable);
 
+    /**
+     * This method creates post for user with specified username.
+     *
+     * @param username - user's username.
+     * @param post - post to create.
+     * @return created post identifier.
+     */
+    Long create(String username, Post post);
+
+    /**
+     * This method updates post of user with specified username. Throws forbidden exception if the user is not the
+     * author of the post.
+     *
+     * @param username - user's username.
+     * @param post - post to update.
+     * @return updated post identifier.
+     */
+    Long update(String username, Post post);
+
+    /**
+     * This method deletes post of user with specified username. Throws forbidden exception if the user if not the
+     * author of the post.
+     *
+     * @param username - user's username.
+     * @param id - identifier of post to delete.
+     */
+    void delete(String username, Long id);
+
 }

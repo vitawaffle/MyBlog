@@ -4,17 +4,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This exception used to send unauthorized http status code to client.
+ * This exception used to send forbidden http status code to client.
  *
  * @author Vitaly Lobatsevich (vitaly.lobatsevich@gmail.com)
  */
-@ResponseStatus(HttpStatus.UNAUTHORIZED)
-public class UnauthorizedException extends RuntimeException {
+@ResponseStatus(HttpStatus.FORBIDDEN)
+public class ForbiddenException extends RuntimeException {
 
     /**
      * Constructor.
      */
-    public UnauthorizedException() {
+    public ForbiddenException() {
         super();
     }
 
@@ -23,7 +23,7 @@ public class UnauthorizedException extends RuntimeException {
      *
      * @param errorMessage - error message.
      */
-    public UnauthorizedException(final String errorMessage) {
+    public ForbiddenException(final String errorMessage) {
         super(errorMessage);
     }
 
