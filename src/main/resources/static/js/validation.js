@@ -121,3 +121,23 @@ function checkLastName(lastNameInput, lastNameFeedback) {
     }
     return true;
 }
+
+function checkTitle(titleInput, titleFeedback) {
+    const title = titleInput.val();
+    cleanElement(titleInput, titleFeedback);
+    if (isBlank(title)) {
+        markElementInvalid(titleInput, titleFeedback, "Input the title.");
+        return false;
+    }
+    return true;
+}
+
+function checkContent(contentInput, contentFeedback) {
+    const content = contentInput.val();
+    cleanElement(contentInput, contentFeedback);
+    if (isBlank(content)) {
+        markElementInvalid(contentInput, contentFeedback, "Input the content.");
+        return false;
+    }
+    return true;
+}

@@ -39,6 +39,15 @@ public interface PostService extends MyService<Post, Long> {
     Long update(String username, Post post);
 
     /**
+     * This method saves post for user with specified username.
+     *
+     * @param username - user's username.
+     * @param post - post to save.
+     * @return saved post identifier.
+     */
+    Long save(String username, Post post);
+
+    /**
      * This method deletes post of user with specified username. Throws forbidden exception if the user if not the
      * author of the post.
      *

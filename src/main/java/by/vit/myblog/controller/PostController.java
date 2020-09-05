@@ -5,11 +5,11 @@ import by.vit.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -35,6 +35,18 @@ public class PostController {
     @GetMapping
     public Page<Post> posts(@RequestParam final Optional<Integer> page, @RequestParam final Optional<Integer> size) {
         return postService.getPaginated(PageRequest.of(page.orElse(0), size.orElse(9)));
+    }
+
+    /**
+     * Saves post.
+     *
+     * @param post - post to save.
+     * @return saved post identifier.
+     */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Long posts(@RequestBody @Valid final Post post) {
+        return postService.save(SecurityContextHolder.getContext().getAuthentication().getName(), post);
     }
 
 }

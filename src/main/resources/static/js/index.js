@@ -1,5 +1,11 @@
 const postsArea = $("#postsArea");
 const paginationIndexes = $("#paginationIndexes");
+const editPostModal = $("#editPostModal");
+const titleInput = $("#titleInput");
+const contentTextarea = $("#contentTextarea");
+const titleFeedback = $("#titleFeedback");
+const contentFeedback = $("#contentFeedback");
+const savePostError = $("#savePostError");
 
 const pageSize = 9;
 
@@ -42,6 +48,69 @@ function getPosts(page = null, size = null) {
         }
     });
 }
+
+function showPostEditModal() {
+    editPostModal.show();
+}
+
+function hidePostEditModal() {
+    cleanPostEditForm();
+    editPostModal.hide();
+}
+
+function cleanPostEditForm() {
+    cleanElement(titleInput, titleFeedback);
+    cleanElement(contentTextarea, contentFeedback);
+    titleInput.val("");
+    contentFeedback.val("");
+}
+
+function savePost() {
+    const titleIsValid = checkTitle(titleInput, titleFeedback);
+    const contentIsValid = checkContent(contentTextarea, contentFeedback);
+    if (titleIsValid && contentIsValid) {
+        const title = titleInput.val();
+        const content = contentTextarea.val();
+        $.ajax({
+            type: "POST",
+            url: "/posts",
+            data: JSON.stringify({
+                title: title,
+                content: content
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            complete: function (jqXHR) {
+                switch (jqXHR.status) {
+                    case 201:
+                        hidePostEditModal();
+                        getPosts();
+                        break;
+                    case 400:
+                        const errors = JSON.parse(jqXHR.responseText);
+                        if (errors.title !== undefined)
+                            markElementInvalid(titleInput, titleFeedback, errors.title);
+                        if (errors.content !== undefined)
+                            markElementInvalid(contentTextarea, contentFeedback, errors.content);
+                        break;
+                    default:
+                        savePostError.show();
+                        setTimeout(function () {
+                            savePostError.hide();
+                        }, 7000);
+                }
+            }
+        });
+    }
+}
+
+titleInput.blur(function () {
+    checkTitle(titleInput, titleFeedback);
+});
+
+contentTextarea.blur(function () {
+    checkContent(contentTextarea, contentFeedback);
+});
 
 window.onload = function () {
     getPosts();

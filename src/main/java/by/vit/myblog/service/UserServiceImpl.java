@@ -5,6 +5,7 @@ import by.vit.myblog.entity.Password;
 import by.vit.myblog.entity.Person;
 import by.vit.myblog.entity.Role;
 import by.vit.myblog.entity.User;
+import by.vit.myblog.exception.BadRequestException;
 import by.vit.myblog.exception.UnauthorizedException;
 import by.vit.myblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -82,7 +83,9 @@ public class UserServiceImpl implements UserService {
         if (person.getDob() != null) {
             try {
                 user.setDob(dateFormatter.parse(person.getDob()));
-            } catch (ParseException ignore) {}
+            } catch (ParseException ignore) {
+                throw new BadRequestException("Invalid date format.");
+            }
         }
         user.setBio(person.getBio());
         return userRepository.save(user).getId();

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
@@ -18,10 +19,12 @@ import java.util.Date;
 public class Post extends MyEntity {
 
     /** Post title. */
+    @NotBlank(message = "Input the title.")
     @Column(name = "title", nullable = false)
     private String title;
 
     /** Post content. */
+    @NotBlank(message = "Input the content.")
     @Column(name = "content", nullable = false)
     private String content;
 

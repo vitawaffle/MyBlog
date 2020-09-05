@@ -71,6 +71,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Long save(final String username, final Post post) {
+        if (post.getId() == null)
+            return create(username, post);
+        return update(username, post);
+    }
+
+    @Override
     public void delete(final String username, final Long id) {
         val post = postRepository.findById(id).orElse(null);
         if (post != null) {
