@@ -137,6 +137,28 @@ function updatePersonalInfo() {
     }
 }
 
+function formatFirstName(firstName) {
+    let formattedFirstName = "";
+    let temp = firstName.replace(/[^A-Za-z]/g, "");
+    if (temp.length > 0) {
+        formattedFirstName += temp.charAt(0).toUpperCase();
+        if (temp.length > 1)
+            formattedFirstName += temp.substr(1).toLowerCase();
+    }
+    return formattedFirstName;
+}
+
+function formatLastName(lastName) {
+    let formattedLastName = "";
+    let temp = lastName.replace(/[^A-Za-z]/g, "");
+    if (temp.length > 0) {
+        formattedLastName += temp.charAt(0).toUpperCase();
+        if (temp.length > 1)
+            formattedLastName += temp.substr(1).toLowerCase();
+    }
+    return formattedLastName;
+}
+
 currentPasswordInput.blur(function () {
     checkCurrentPassword(currentPasswordInput, currentPasswordFeedback);
 });
@@ -155,6 +177,14 @@ firstNameInput.blur(function () {
 
 lastNameInput.blur(function () {
     checkLastName(lastNameInput, lastNameFeedback);
+});
+
+firstNameInput.change(function () {
+    firstNameInput.val(formatFirstName(firstNameInput.val()));
+});
+
+lastNameInput.change(function () {
+    lastNameInput.val(formatLastName(lastNameInput.val()));
 });
 
 window.onload = function () {
