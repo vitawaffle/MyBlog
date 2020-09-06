@@ -38,6 +38,17 @@ public class PostController {
     }
 
     /**
+     * Returns post by id.
+     *
+     * @param id - post id.
+     * @return post or null.
+     */
+    @GetMapping("/{id}")
+    public Post posts(@PathVariable final Long id) {
+        return postService.getById(id);
+    }
+
+    /**
      * Saves post.
      *
      * @param post - post to save.

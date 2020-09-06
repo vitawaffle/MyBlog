@@ -69,4 +69,14 @@ public class MainController {
         return userService.getPersonInfoByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
+    /**
+     * Get current user username.
+     *
+     * @return username.
+     */
+    @GetMapping("/username")
+    public String getUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 }

@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(registry -> {
                     registry
                             .antMatchers("/", "/css/**", "/js/**", "/img/**", "/signIn").permitAll()
-                            .antMatchers(HttpMethod.GET, "/posts").permitAll()
+                            .antMatchers(HttpMethod.GET, "/posts/**", "/username").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(registry -> {

@@ -6,22 +6,24 @@ const contentTextarea = $("#contentTextarea");
 const titleFeedback = $("#titleFeedback");
 const contentFeedback = $("#contentFeedback");
 const savePostError = $("#savePostError");
+const idInput = $("#idInput");
 
 const pageSize = 9;
 
 function getPosts(page = null, size = null) {
-    let url = "/posts";
-    if (page !== null && size !== null)
-        url += `?page=${page}&size=${size}`;
-    else if (page !== null)
-        url += `?page=${page}`;
-    else if (size !== null)
-        url += `?size=${size}`;
+    $.get("/username", function (username) {
+        let url = "/posts";
+        if (page !== null && size !== null)
+            url += `?page=${page}&size=${size}`;
+        else if (page !== null)
+            url += `?page=${page}`;
+        else if (size !== null)
+            url += `?size=${size}`;
 
-    $.getJSON(url, function (page) {
-        postsArea.html("");
-        page.content.forEach(post => {
-            postsArea.append(`
+        $.getJSON(url, function (page) {
+            postsArea.html("");
+            page.content.forEach(post => {
+                postsArea.append(`
                 <div class="col mb-3">
                     <div class="card">
                         <div class="card-body">
@@ -31,26 +33,41 @@ function getPosts(page = null, size = null) {
                                 ${post.content}
                             </p>
                             <p class="text-muted">${post.creation}</p>
+                            ${username === post.user.username ? `
+                            <a class="btn btn-primary" onclick="showPostEditModal(${post.id})">Edit</a>
+                            <a class="btn btn-outline-secondary" onclick="deletePost(${post.id})">Delete</a>
+                            ` : ""}
                         </div>
                     </div>
                 </div>
-            `);
-        });
+                `);
+            });
 
-        paginationIndexes.html("");
-        for (let i = 0; i < page.totalPages; i++) {
-            paginationIndexes.append(`
+            paginationIndexes.html("");
+            for (let i = 0; i < page.totalPages; i++) {
+                paginationIndexes.append(`
                 <li>
                     <a class="page-link${i === page.number ? ' active' : ''}" style="cursor: pointer;"
                         onclick="getPosts(${i}, ${pageSize});">${i + 1}</a>
                 </li>
             `);
-        }
+            }
+        });
     });
 }
 
-function showPostEditModal() {
+function showPostEditModal(id = null) {
     editPostModal.show();
+    if (id !== null) {
+        $.getJSON(
+            `/posts/${id}`,
+            function (post) {
+                idInput.val(post.id);
+                titleInput.val(post.title);
+                contentTextarea.val(post.content);
+            }
+        )
+    }
 }
 
 function hidePostEditModal() {
@@ -61,8 +78,9 @@ function hidePostEditModal() {
 function cleanPostEditForm() {
     cleanElement(titleInput, titleFeedback);
     cleanElement(contentTextarea, contentFeedback);
+    idInput.val("");
     titleInput.val("");
-    contentFeedback.val("");
+    contentTextarea.val("");
 }
 
 function savePost() {
@@ -71,10 +89,12 @@ function savePost() {
     if (titleIsValid && contentIsValid) {
         const title = titleInput.val();
         const content = contentTextarea.val();
+        const id = idInput.val() !== "" ? idInput.val() : null;
         $.ajax({
             type: "POST",
             url: "/posts",
             data: JSON.stringify({
+                id: id,
                 title: title,
                 content: content
             }),
@@ -102,6 +122,10 @@ function savePost() {
             }
         });
     }
+}
+
+function deletePost(id) {
+    alert(id);
 }
 
 titleInput.blur(function () {
