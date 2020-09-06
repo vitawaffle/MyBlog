@@ -33,7 +33,8 @@ public class PostController {
      * @return page of posts or empty page.
      */
     @GetMapping
-    public Page<Post> posts(@RequestParam final Optional<Integer> page, @RequestParam final Optional<Integer> size) {
+    public Page<Post> getPosts(@RequestParam final Optional<Integer> page,
+                               @RequestParam final Optional<Integer> size) {
         return postService.getPaginated(PageRequest.of(page.orElse(0), size.orElse(9)));
     }
 
@@ -44,7 +45,7 @@ public class PostController {
      * @return post or null.
      */
     @GetMapping("/{id}")
-    public Post posts(@PathVariable final Long id) {
+    public Post getPost(@PathVariable final Long id) {
         return postService.getById(id);
     }
 
@@ -56,8 +57,18 @@ public class PostController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long posts(@RequestBody @Valid final Post post) {
+    public Long savePost(@RequestBody @Valid final Post post) {
         return postService.save(SecurityContextHolder.getContext().getAuthentication().getName(), post);
+    }
+
+    /**
+     * Deletes post by id.
+     *
+     * @param id - post id.
+     */
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable final Long id) {
+        postService.delete(SecurityContextHolder.getContext().getAuthentication().getName(), id);
     }
 
 }

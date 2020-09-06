@@ -8,9 +8,15 @@ const contentFeedback = $("#contentFeedback");
 const savePostError = $("#savePostError");
 const idInput = $("#idInput");
 
-const pageSize = 9;
+const defaultPageSize = 9;
 
-function getPosts(page = null, size = null) {
+let page = null;
+let size = null;
+
+function getPosts(pageNumber = null, pageSize = null) {
+    page = pageNumber;
+    size = pageSize;
+
     $.get("/username", function (username) {
         let url = "/posts";
         if (page !== null && size !== null)
@@ -48,7 +54,7 @@ function getPosts(page = null, size = null) {
                 paginationIndexes.append(`
                 <li>
                     <a class="page-link${i === page.number ? ' active' : ''}" style="cursor: pointer;"
-                        onclick="getPosts(${i}, ${pageSize});">${i + 1}</a>
+                        onclick="getPosts(${i}, ${defaultPageSize});">${i + 1}</a>
                 </li>
             `);
             }
@@ -125,7 +131,13 @@ function savePost() {
 }
 
 function deletePost(id) {
-    alert(id);
+    $.ajax({
+        url: `/posts/${id}`,
+        type: "DELETE",
+        complete: function () {
+            getPosts(page, size);
+        }
+    });
 }
 
 titleInput.blur(function () {
